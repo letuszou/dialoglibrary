@@ -1,5 +1,3 @@
-
-
 ## 第一步创建 弹窗工具类 ##
 
     DialogUtil dialogUtil = new DialogUtil(this);
