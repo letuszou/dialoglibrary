@@ -24,6 +24,9 @@ public class DialogUtil {
     private Dialog topDialog;
     private Dialog middleDialog;
     private Dialog bottomDialog;
+    private Dialog middleDialogPadding;
+    private Dialog topDialogPadding;
+    private Dialog bottomDialogPadding;
 
     public DialogUtil(Context context) {
         this.context = context;
@@ -54,20 +57,19 @@ public class DialogUtil {
         // 展示Dialog
         topDialog.show();
         return viewTop;
-
-
     }
 
 
     public void closeTopDialog() {
-        if (topDialog.isShowing()) {
-            topDialog.dismiss();
+        if (topDialog != null) {
+            if (topDialog.isShowing()) {
+                topDialog.dismiss();
+            }
         }
     }
 
 
     public View showMiddleDialog(@LayoutRes int resource) {
-
         View viewMiddle = LayoutInflater.from(context).inflate(resource, null);
         middleDialog = new Dialog(context, R.style.dialog_style);
         middleDialog.setContentView(viewMiddle, new ViewGroup.LayoutParams(LinearLayoutCompat.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -83,19 +85,19 @@ public class DialogUtil {
         // 展示Dialog
         middleDialog.show();
         return viewMiddle;
-
     }
 
 
     public void closemiddleDialog() {
-        if (middleDialog.isShowing()) {
-            middleDialog.dismiss();
+        if (middleDialog != null) {
+            if (middleDialog.isShowing()) {
+                middleDialog.dismiss();
+            }
         }
     }
 
 
     public View showBottomDialog(@LayoutRes int resource) {
-
         View viewBottom = LayoutInflater.from(context).inflate(resource, null);
         bottomDialog = new Dialog(context, R.style.dialog_style);
         bottomDialog.setContentView(viewBottom, new ViewGroup.LayoutParams(LinearLayoutCompat.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
@@ -117,14 +119,120 @@ public class DialogUtil {
         // 展示Dialog
         bottomDialog.show();
         return viewBottom;
-
-
     }
 
 
     public void closeBottomDialog() {
-        if (bottomDialog.isShowing()) {
-            bottomDialog.dismiss();
+        if (bottomDialog != null) {
+            if (bottomDialog.isShowing()) {
+                bottomDialog.dismiss();
+            }
+        }
+    }
+
+
+    public View showTopDialogPadding(@LayoutRes int resource, int margin, int padding) {
+
+        View viewTopPadding = LayoutInflater.from(context).inflate(resource, null);
+        topDialogPadding = new Dialog(context, R.style.dialog_style);
+        topDialogPadding.setContentView(viewTopPadding, new ViewGroup.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        Window window = topDialogPadding.getWindow();
+        window.getDecorView().setPadding(padding, 0, padding, 0);
+        // 为dialog设置动画
+        window.setWindowAnimations(R.style.dialog_animation_top);
+        WindowManager.LayoutParams wl = window.getAttributes();
+        //Dialog的初始位置
+        wl.x = 0;
+        wl.y = -dm.heightPixels;
+        // 设置Dialog应该占的空间参数
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        int windowWidth = wm.getDefaultDisplay().getWidth();
+        wl.width = windowWidth - margin;
+        wl.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+//         把参数设置到Dialog里
+        topDialogPadding.onWindowAttributesChanged(wl);
+        // 设置点击空白处消失
+        topDialogPadding.setCanceledOnTouchOutside(true);
+        // 展示Dialog
+        topDialogPadding.show();
+
+        return viewTopPadding;
+
+    }
+
+    public void closeTopDialogPadding() {
+        if (topDialogPadding != null) {
+            if (topDialogPadding.isShowing()) {
+                topDialogPadding.dismiss();
+            }
+        }
+    }
+
+
+    public View showMiddleDialogPadding(@LayoutRes int resource, int margin, int padding) {
+
+        View viewMiddlePadding = LayoutInflater.from(context).inflate(resource, null);
+        middleDialogPadding = new Dialog(context, R.style.dialog_style);
+        middleDialogPadding.setContentView(viewMiddlePadding, new ViewGroup.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        Window window = middleDialogPadding.getWindow();
+        window.getDecorView().setPadding(padding, 0, padding, 0);
+        WindowManager.LayoutParams wl = window.getAttributes();
+//         设置Dialog应该占的空间参数
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        int windowWidth = wm.getDefaultDisplay().getWidth();
+        wl.width = windowWidth - margin;
+        wl.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+//         把参数设置到Dialog里
+        middleDialogPadding.onWindowAttributesChanged(wl);
+        // 设置点击空白处消失
+        middleDialogPadding.setCanceledOnTouchOutside(true);
+        // 展示Dialog
+        middleDialogPadding.show();
+
+        return viewMiddlePadding;
+
+    }
+
+    public void closeMiddleDialogPadding() {
+        if (middleDialogPadding != null) {
+            if (middleDialogPadding.isShowing()) {
+                middleDialogPadding.dismiss();
+            }
+        }
+    }
+
+
+    public View showBottomDialogPadding(@LayoutRes int resource, int margin, int padding) {
+        View viewMiddlePadding = LayoutInflater.from(context).inflate(resource, null);
+        bottomDialogPadding = new Dialog(context, R.style.dialog_style);
+        bottomDialogPadding.setContentView(viewMiddlePadding, new ViewGroup.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        Window window = bottomDialogPadding.getWindow();
+        window.getDecorView().setPadding(padding, 0, padding, 0);
+        WindowManager.LayoutParams wl = window.getAttributes();
+        //Dialog的初始位置
+        wl.x = 0;
+        wl.y = dm.heightPixels;
+        // 设置Dialog应该占的空间参数
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        int windowWidth = wm.getDefaultDisplay().getWidth();
+        wl.width = windowWidth - margin;
+        wl.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+//         把参数设置到Dialog里
+        bottomDialogPadding.onWindowAttributesChanged(wl);
+        // 设置点击空白处消失
+        bottomDialogPadding.setCanceledOnTouchOutside(true);
+        // 展示Dialog
+        bottomDialogPadding.show();
+
+        return viewMiddlePadding;
+
+    }
+
+    public void closeBottomDialogPadding() {
+        if (bottomDialogPadding != null) {
+            if (bottomDialogPadding.isShowing()) {
+                bottomDialogPadding.dismiss();
+            }
         }
     }
 
