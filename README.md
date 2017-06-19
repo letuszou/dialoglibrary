@@ -5,35 +5,31 @@
 ## 第二步设置 弹窗的布局文件##
 
 	顶部弹窗
-    View view = dialogUtil.showTopDialog(R.layout.dialog);				
+    View view =  View view = DialogUtil.getInstance(this).showTopDialog(R.layout.dialog);		
+	showTopDialogPadding(int layout,int padding,int margin)
 
 	中间弹窗
-    View view = dialogUtil.showMiddleDialog(R.layout.dialog);
+    showMiddleDialog(R.layout.dialog);
+	showMiddleDialogPadding(int layout,int padding,int margin)
 
 	底部弹窗
-    View view = dialogUtil.showBottomDialog(R.layout.dialog);
-
-	设置弹窗的间距
-	showTopDialogPadding(int layout,int padding,int margin)
-				可以设置弹窗于两边的间距
-	View view = dialogUtil.dialogUtil.showTopDialog(R.layout.dialog,100,100);  
-
+    showBottomDialog(R.layout.dialog);
+	showBottoDialogPadding(int layout,int padding,int margin)
 
 
 ## 第三步设置 关闭弹窗 ##	
 
 	顶部弹窗
     dialogUtil.closeTopDialog();
+	closeTopDialogPadding();
 
 	中间弹窗
     dialogUtil.closemiddleDialog();
+	closeMiddleDialogPadding();
 
 	底部弹窗
     dialogUtil.closeBottomDialog();
-
 	dialogUtil.closeTopDialogPadding();  
 
-2017-6-14
-	1处理了dialogUtil空指针的问题
-	2添加了设置弹窗间距的方法
+	
 

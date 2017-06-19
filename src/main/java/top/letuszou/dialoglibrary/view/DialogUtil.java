@@ -28,7 +28,23 @@ public class DialogUtil {
     private Dialog topDialogPadding;
     private Dialog bottomDialogPadding;
 
-    public DialogUtil(Context context) {
+    static DialogUtil instance = null;
+
+    public static DialogUtil getInstance(Context context) {
+        if (instance == null) {
+            createInstance(context);
+        }
+        return instance;
+    }
+
+    private synchronized static DialogUtil createInstance(Context context) {
+        if (instance == null) {
+            instance = new DialogUtil(context);
+        }
+        return instance;
+    }
+
+    private DialogUtil(Context context) {
         this.context = context;
         dm = context.getResources().getDisplayMetrics();
     }
@@ -88,7 +104,7 @@ public class DialogUtil {
     }
 
 
-    public void closemiddleDialog() {
+    public void closeMiddleDialog() {
         if (middleDialog != null) {
             if (middleDialog.isShowing()) {
                 middleDialog.dismiss();
