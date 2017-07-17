@@ -1,22 +1,21 @@
 apply plugin: 'com.android.library'
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
+//apply plugin: 'com.github.dcendents.android-maven'
+//apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.novoda.bintray-release'//添加
 
 // This is the library version used when deploying the artifact
 
 android {
     compileSdkVersion 24
     buildToolsVersion "25.0.3"
-    resourcePrefix "dialoglibrary_"	//这个随便填
+    resourcePrefix "dialoglibrary"	//这个随便填
     defaultConfig {
         minSdkVersion 18
         targetSdkVersion 24
         versionCode 1
-        versionName "1.0.0"
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        versionName "1.0.1"
     }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -29,71 +28,82 @@ dependencies {
     compile 'com.android.support:appcompat-v7:24.2.1'
 }
 
-def siteUrl = 'https://github.com/letuszou/dialoglibrary'
-def gitUrl = 'git@github.com:letuszou/dialoglibrary.git'
+//添加
+publish {
+    userOrg = 'letuszou'//bintray.com用户名
+    groupId = 'com.letuszou'//jcenter上的路径
+    artifactId = 'dialoglibrary'//项目名称
+    publishVersion = '1.0.1'//版本号
+    desc = 'Oh hi, this is a nice description for a project, right?'//描述，不重要
+    website = 'https://github.com/letuszou/dialoglibrary'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
+}
 
-group = "top.letuszou.dialoglibrary"
-// Maven Group ID for the artifact，一般填你唯一的包名
-install {
-    repositories.mavenInstaller {
-        // This generates POM.xml with proper parameters
-        pom {
-            project {
-                packaging 'aar'
-                // Add your description here
-                name 'https://github.com/letuszou/dialoglibrary'    //项目描述
-                url siteUrl
-                // Set your license
-                licenses {
-                    license {
-                        name 'The Apache Software License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-                developers {
-                    developer {
-                        id 'dialoglibrary'        //填写的一些基本信息
-                        name 'letuszou'
-                        email 'letuszou@126.com'
-                    }
-                }
-                scm {
-                    connection gitUrl
-                    developerConnection gitUrl
-                    url siteUrl
-                }
-            }
-        }
-    }
-}
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
-task javadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-artifacts {
-    archives javadocJar
-    archives sourcesJar
-}
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-bintray {
-    user = properties.getProperty("letuszou@126.com")
-    key = properties.getProperty("7389f2350699663b7adc8ea37f999218e0aa0454")
-    configurations = ['archives']
-    pkg {
-        repo = "maven"
-        name = "dialoglibrary"    //发布到JCenter上的项目名字
-        websiteUrl = siteUrl
-        vcsUrl = gitUrl
-        licenses = ["Apache-2.0"]
-        publish = true
-    }
-}
+//def siteUrl = 'https://github.com/letuszou/dialoglibrary'
+//def gitUrl = 'git@github.com:letuszou/dialoglibrary.git'
+//
+//group = "top.letuszou.dialoglibrary"
+//// Maven Group ID for the artifact，一般填你唯一的包名
+//install {
+//    repositories.mavenInstaller {
+//        // This generates POM.xml with proper parameters
+//        pom {
+//            project {
+//                packaging 'aar'
+//                // Add your description here
+//                name 'Android dialog'    //项目描述
+//                url siteUrl
+//                // Set your license
+//                licenses {
+//                    license {
+//                        name 'The Apache Software License, Version 2.0'
+//                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+//                    }
+//                }
+//                developers {
+//                    developer {
+//                        id 'dialoglibrary'        //填写的一些基本信息
+//                        name 'letuszou'
+//                        email 'letuszou@126.com'
+//                    }
+//                }
+//                scm {
+//                    connection gitUrl
+//                    developerConnection gitUrl
+//                    url siteUrl
+//                }
+//            }
+//        }
+//    }
+//}
+//task sourcesJar(type: Jar) {
+//    from android.sourceSets.main.java.srcDirs
+//    classifier = 'sources'
+//}
+//task javadoc(type: Javadoc) {
+//    source = android.sourceSets.main.java.srcDirs
+//    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+//}
+//task javadocJar(type: Jar, dependsOn: javadoc) {
+//    classifier = 'javadoc'
+//    from javadoc.destinationDir
+//}
+//artifacts {
+//    archives javadocJar
+//    archives sourcesJar
+//}
+//Properties properties = new Properties()
+//properties.load(project.rootProject.file('local.properties').newDataInputStream())
+//bintray {
+//    user = "letuszou"
+//    key = "7389f2350699663b7adc8ea37f999218e0aa0454"
+//    configurations = ['archives']
+//    pkg {
+//        repo = "maven"
+//        name = "dialoglibrary"    //发布到JCenter上的项目名字
+//        websiteUrl = siteUrl
+//        vcsUrl = gitUrl
+//        licenses = ["Apache-2.0"]
+//        publish = true
+//    }
+//}
+
