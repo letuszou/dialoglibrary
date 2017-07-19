@@ -28,8 +28,6 @@ public class DialogUtil {
     private Dialog topDialogPadding;
     private Dialog bottomDialogPadding;
 
-    static DialogUtil instance = null;
-
 
     public DialogUtil(Context context) {
         this.context = context;
@@ -61,10 +59,10 @@ public class DialogUtil {
     }
 
     //弹窗高度倍数
-    public View showTopDialog(@LayoutRes int resource, int widthMultiple) {
+    public View showTopDialog(@LayoutRes int resource, int heightMultiple) {
         View viewTop = LayoutInflater.from(context).inflate(resource, null);
         topDialog = new Dialog(context, R.style.dialog_style);
-        topDialog.setContentView(viewTop, new ViewGroup.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT / widthMultiple));
+        topDialog.setContentView(viewTop, new ViewGroup.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT / heightMultiple));
         Window window = topDialog.getWindow();
         // 为dialog设置动画
         window.setWindowAnimations(R.style.dialog_animation_top);
@@ -74,7 +72,7 @@ public class DialogUtil {
         wl.y = -dm.heightPixels;
         // 设置Dialog应该占的空间参数
         wl.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        wl.height = ViewGroup.LayoutParams.WRAP_CONTENT / widthMultiple;
+        wl.height = ViewGroup.LayoutParams.WRAP_CONTENT / heightMultiple;
         // 把参数设置到Dialog里
         topDialog.onWindowAttributesChanged(wl);
         // 设置点击空白处消失
@@ -141,15 +139,15 @@ public class DialogUtil {
         return viewMiddle;
     }
 
-    public View showMiddleDialog(@LayoutRes int resource, int widthMultiple) {
+    public View showMiddleDialog(@LayoutRes int resource, int heightMultiple) {
         View viewMiddle = LayoutInflater.from(context).inflate(resource, null);
         middleDialog = new Dialog(context, R.style.dialog_style);
-        middleDialog.setContentView(viewMiddle, new ViewGroup.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT / widthMultiple));
+        middleDialog.setContentView(viewMiddle, new ViewGroup.LayoutParams(LinearLayoutCompat.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT / heightMultiple));
         Window window = middleDialog.getWindow();
         WindowManager.LayoutParams wl = window.getAttributes();
 //         设置Dialog应该占的空间参数
         wl.width = ViewGroup.LayoutParams.MATCH_PARENT;
-        wl.height = ViewGroup.LayoutParams.WRAP_CONTENT / widthMultiple;
+        wl.height = ViewGroup.LayoutParams.WRAP_CONTENT / heightMultiple;
 //         把参数设置到Dialog里
         middleDialog.onWindowAttributesChanged(wl);
         // 设置点击空白处消失
